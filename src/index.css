@@ -55,6 +55,8 @@
     --type-syllabus-bg: 280 60% 95%;
     --type-assignment: 35 90% 50%;
     --type-assignment-bg: 35 90% 95%;
+    --type-pyq: 320 70% 50%;
+    --type-pyq-bg: 320 70% 95%;
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
@@ -172,6 +174,11 @@
   .badge-assignment {
     background-color: hsl(var(--type-assignment-bg));
     color: hsl(var(--type-assignment));
+  }
+
+  .badge-pyq {
+    background-color: hsl(var(--type-pyq-bg));
+    color: hsl(var(--type-pyq));
   }
 }
 

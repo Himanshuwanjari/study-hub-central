@@ -1,7 +1,7 @@
 import { GraduationCap, Bookmark, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { UploadModal } from './UploadModal';
-import { useState } from 'react';
+import { ThemeToggle } from './ThemeToggle';
+import { NavLink } from './NavLink';
 import { cn } from '@/lib/utils';
 
 interface HeaderProps {
@@ -45,7 +45,16 @@ export function Header({
           </div>
         </div>
 
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-1">
+          <NavLink to="/">Resources</NavLink>
+          <NavLink to="/pyq">PYQ</NavLink>
+          <NavLink to="/my-submissions">My Submissions</NavLink>
+          <NavLink to="/faculty">Faculty</NavLink>
+        </nav>
+
         <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <Button
             variant={showBookmarks ? 'default' : 'outline'}
             size="sm"
@@ -63,8 +72,6 @@ export function Header({
               </span>
             )}
           </Button>
-          
-          <UploadModal />
         </div>
       </div>
     </header>

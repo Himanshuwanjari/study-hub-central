@@ -1,6 +1,6 @@
 import { ResourceType, resourceTypeLabels } from '@/types/resource';
 import { cn } from '@/lib/utils';
-import { FileText, Calendar, BookOpen, ClipboardList } from 'lucide-react';
+import { FileText, Calendar, BookOpen, ClipboardList, FileQuestion } from 'lucide-react';
 
 interface FilterTabsProps {
   selectedType: ResourceType | 'all';
@@ -13,6 +13,7 @@ const typeIcons: Record<ResourceType | 'all', React.ReactNode> = {
   timetable: <Calendar className="w-4 h-4" />,
   syllabus: <BookOpen className="w-4 h-4" />,
   assignment: <ClipboardList className="w-4 h-4" />,
+  pyq: <FileQuestion className="w-4 h-4" />,
 };
 
 export function FilterTabs({ selectedType, onSelect }: FilterTabsProps) {

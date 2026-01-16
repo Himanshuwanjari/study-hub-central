@@ -1,5 +1,5 @@
 import { ResourceType, resourceTypeLabels } from '@/types/resource';
-import { FileText, Calendar, BookOpen, ClipboardList } from 'lucide-react';
+import { FileText, Calendar, BookOpen, ClipboardList, FileQuestion } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ResourceTypeBadgeProps {
@@ -12,6 +12,7 @@ const typeIcons: Record<ResourceType, React.ReactNode> = {
   timetable: <Calendar className="w-3.5 h-3.5" />,
   syllabus: <BookOpen className="w-3.5 h-3.5" />,
   assignment: <ClipboardList className="w-3.5 h-3.5" />,
+  pyq: <FileQuestion className="w-3.5 h-3.5" />,
 };
 
 export function ResourceTypeBadge({ type, className }: ResourceTypeBadgeProps) {
@@ -23,6 +24,7 @@ export function ResourceTypeBadge({ type, className }: ResourceTypeBadgeProps) {
         type === 'timetable' && 'badge-timetable',
         type === 'syllabus' && 'badge-syllabus',
         type === 'assignment' && 'badge-assignment',
+        type === 'pyq' && 'badge-pyq',
         className
       )}
     >
