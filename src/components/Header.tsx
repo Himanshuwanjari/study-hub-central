@@ -36,7 +36,7 @@ export function Header({
             </div>
             <div className="hidden sm:block">
               <h1 className="font-display font-bold text-lg text-foreground">
-                College Resource Hub
+                CampusVault
               </h1>
               <p className="text-xs text-muted-foreground -mt-0.5">
                 Your Academic Gateway
@@ -46,10 +46,10 @@ export function Header({
         </div>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-2">
           <NavLink to="/">Resources</NavLink>
           <NavLink to="/pyq">PYQ</NavLink>
-          <NavLink to="/my-submissions">My Submissions</NavLink>
+          <NavLink to="/my-submissions">MySubmissions</NavLink>
           <NavLink to="/faculty">Faculty</NavLink>
         </nav>
 
