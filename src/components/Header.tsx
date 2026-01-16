@@ -46,7 +46,7 @@ export function Header({
         </div>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-4">
           <NavLink to="/">Resources</NavLink>
           <NavLink to="/pyq">PYQ</NavLink>
           <NavLink to="/my-submissions">MySubmissions</NavLink>
