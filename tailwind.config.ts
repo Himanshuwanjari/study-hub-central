@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Resource type colors
+        notes: {
+          DEFAULT: "hsl(var(--type-notes))",
+          bg: "hsl(var(--type-notes-bg))",
+        },
+        timetable: {
+          DEFAULT: "hsl(var(--type-timetable))",
+          bg: "hsl(var(--type-timetable-bg))",
+        },
+        syllabus: {
+          DEFAULT: "hsl(var(--type-syllabus))",
+          bg: "hsl(var(--type-syllabus-bg))",
+        },
+        assignment: {
+          DEFAULT: "hsl(var(--type-assignment))",
+          bg: "hsl(var(--type-assignment-bg))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,20 +86,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
