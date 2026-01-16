@@ -72,16 +72,22 @@ export function ResourceCard({ resource, isBookmarked, onToggleBookmark }: Resou
               variant="ghost"
               size="sm"
               className="h-8 px-3 text-muted-foreground hover:text-foreground"
+              asChild
             >
-              <Eye className="w-4 h-4 mr-1.5" />
-              View
+              <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
+                <Eye className="w-4 h-4 mr-1.5" />
+                View
+              </a>
             </Button>
             <Button
               size="sm"
               className="h-8 px-3 bg-primary hover:bg-primary/90 text-primary-foreground shadow-button"
+              asChild
             >
-              <Download className="w-4 h-4 mr-1.5" />
-              Download
+              <a href={resource.fileUrl} download={resource.fileName}>
+                <Download className="w-4 h-4 mr-1.5" />
+                Download
+              </a>
             </Button>
           </div>
         </div>
