@@ -1,8 +1,9 @@
-import { GraduationCap, Bookmark, Menu, X } from 'lucide-react';
+import { GraduationCap, Bookmark, Menu, X, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from './NavLink';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/useAuth';
 
 interface HeaderProps {
   bookmarkCount: number;
@@ -19,6 +20,8 @@ export function Header({
   onMenuToggle,
   isMobileMenuOpen,
 }: HeaderProps) {
+  const { user, role, signOut } = useAuth();
+
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -50,10 +53,18 @@ export function Header({
           <NavLink to="/">Resources</NavLink>
           <NavLink to="/pyq">PYQ</NavLink>
           <NavLink to="/my-submissions">MySubmissions</NavLink>
-          <NavLink to="/faculty">Faculty</NavLink>
+          {(role === 'teacher' || role === 'admin') && (
+            <NavLink to="/faculty">Faculty</NavLink>
+          )}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Role badge */}
+          {role && (
+            <span className="hidden sm:inline text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground capitalize font-medium">
+              {role}
+            </span>
+          )}
           <ThemeToggle />
           <Button
             variant={showBookmarks ? 'default' : 'outline'}
@@ -72,6 +83,11 @@ export function Header({
               </span>
             )}
           </Button>
+          {user && (
+            <Button variant="ghost" size="sm" onClick={signOut} title="Sign out">
+              <LogOut className="w-4 h-4" />
+            </Button>
+          )}
         </div>
       </div>
     </header>

@@ -4,10 +4,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import { AuthProvider } from "@/hooks/useAuth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import PYQPage from "./pages/PYQPage";
 import FacultyDashboard from "./pages/FacultyDashboard";
 import MySubmissions from "./pages/MySubmissions";
+import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,13 +22,20 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/pyq" element={<PYQPage />} />
-            <Route path="/faculty" element={<FacultyDashboard />} />
-            <Route path="/my-submissions" element={<MySubmissions />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AuthProvider>
+            <Routes>
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/pyq" element={<ProtectedRoute><PYQPage /></ProtectedRoute>} />
+              <Route path="/faculty" element={
+                <ProtectedRoute allowedRoles={['admin', 'teacher']}>
+                  <FacultyDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/my-submissions" element={<ProtectedRoute><MySubmissions /></ProtectedRoute>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
