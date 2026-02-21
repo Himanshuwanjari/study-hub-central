@@ -1,4 +1,5 @@
-import { GraduationCap, Bookmark, Menu, X, LogOut } from 'lucide-react';
+import { GraduationCap, Bookmark, Menu, X, LogOut, LogIn } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { NavLink } from './NavLink';
@@ -21,6 +22,7 @@ export function Header({
   isMobileMenuOpen,
 }: HeaderProps) {
   const { user, role, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
@@ -38,12 +40,8 @@ export function Header({
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-display font-bold text-lg text-foreground">
-                CampusVault
-              </h1>
-              <p className="text-xs text-muted-foreground -mt-0.5">
-                Your Academic Gateway
-              </p>
+              <h1 className="font-display font-bold text-lg text-foreground">CampusVault</h1>
+              <p className="text-xs text-muted-foreground -mt-0.5">Your Academic Gateway</p>
             </div>
           </div>
         </div>
@@ -52,14 +50,13 @@ export function Header({
         <nav className="hidden md:flex items-center gap-4">
           <NavLink to="/">Resources</NavLink>
           <NavLink to="/pyq">PYQ</NavLink>
-          <NavLink to="/my-submissions">MySubmissions</NavLink>
+          {user && <NavLink to="/my-submissions">MySubmissions</NavLink>}
           {(role === 'teacher' || role === 'admin') && (
             <NavLink to="/faculty">Faculty</NavLink>
           )}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Role badge */}
           {role && (
             <span className="hidden sm:inline text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground capitalize font-medium">
               {role}
@@ -70,10 +67,7 @@ export function Header({
             variant={showBookmarks ? 'default' : 'outline'}
             size="sm"
             onClick={onToggleBookmarks}
-            className={cn(
-              'relative',
-              showBookmarks && 'bg-primary text-primary-foreground'
-            )}
+            className={cn('relative', showBookmarks && 'bg-primary text-primary-foreground')}
           >
             <Bookmark className={cn('w-4 h-4', showBookmarks && 'fill-current')} />
             <span className="hidden sm:inline ml-2">Bookmarks</span>
@@ -83,9 +77,14 @@ export function Header({
               </span>
             )}
           </Button>
-          {user && (
+          {user ? (
             <Button variant="ghost" size="sm" onClick={signOut} title="Sign out">
               <LogOut className="w-4 h-4" />
+            </Button>
+          ) : (
+            <Button size="sm" onClick={() => navigate('/auth')}>
+              <LogIn className="w-4 h-4 mr-1.5" />
+              <span className="hidden sm:inline">Login</span>
             </Button>
           )}
         </div>

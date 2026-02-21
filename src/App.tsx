@@ -25,14 +25,18 @@ const App = () => (
           <AuthProvider>
             <Routes>
               <Route path="/auth" element={<AuthPage />} />
-              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/pyq" element={<ProtectedRoute><PYQPage /></ProtectedRoute>} />
+              <Route path="/" element={<Index />} />
+              <Route path="/pyq" element={<PYQPage />} />
               <Route path="/faculty" element={
                 <ProtectedRoute allowedRoles={['admin', 'teacher']}>
                   <FacultyDashboard />
                 </ProtectedRoute>
               } />
-              <Route path="/my-submissions" element={<ProtectedRoute><MySubmissions /></ProtectedRoute>} />
+              <Route path="/my-submissions" element={
+                <ProtectedRoute>
+                  <MySubmissions />
+                </ProtectedRoute>
+              } />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AuthProvider>
