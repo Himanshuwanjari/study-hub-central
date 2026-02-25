@@ -12,6 +12,7 @@ import FacultyDashboard from "./pages/FacultyDashboard";
 import MySubmissions from "./pages/MySubmissions";
 import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
+import { FAQChatbot } from "./components/FAQChatbot";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
               } />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <FAQChatbot />
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
