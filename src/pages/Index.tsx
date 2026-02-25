@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Header } from '@/components/Header';
+import { useAuth } from '@/hooks/useAuth';
 import { DepartmentSidebar } from '@/components/DepartmentSidebar';
 import { SearchBar } from '@/components/SearchBar';
 import { FilterTabs } from '@/components/FilterTabs';
@@ -12,6 +13,7 @@ import { Department, ResourceType, Semester, departmentLabels } from '@/types/re
 import { cn } from '@/lib/utils';
 
 const Index = () => {
+  const { user, role } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState<Department | 'all'>('all');
   const [selectedType, setSelectedType] = useState<ResourceType | 'all'>('all');
@@ -82,6 +84,16 @@ const Index = () => {
             )}
           >
             <div className="lg:sticky lg:top-24">
+              {/* Mobile nav links */}
+              <nav className="lg:hidden flex flex-col gap-1 mb-6 px-4">
+                <a href="/" className="px-3 py-2 rounded-lg text-sm font-medium bg-accent text-accent-foreground">Resources</a>
+                <a href="/pyq" className="px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">PYQ</a>
+                {user && <a href="/my-submissions" className="px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">My Submissions</a>}
+                {(role === 'teacher' || role === 'admin') && (
+                  <a href="/faculty" className="px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">Faculty</a>
+                )}
+                <div className="border-b border-border my-2" />
+              </nav>
               <h2 className="font-display font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-4 px-4">
                 Departments
               </h2>
